@@ -1,0 +1,25 @@
+[Unit]
+Description=GribBot - Telegram mushroom recognition bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Поменяйте пользователя и путь под свой сервер
+User=gribbot
+WorkingDirectory=/opt/gribbot
+EnvironmentFile=/opt/gribbot/.env
+ExecStart=/opt/gribbot/venv/bin/python /opt/gribbot/bot.py
+
+# Автоперезапуск при падении
+Restart=on-failure
+RestartSec=5
+
+# Базовая изоляция
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

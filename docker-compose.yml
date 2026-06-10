@@ -1,0 +1,13 @@
+services:
+  gribbot:
+    build: .
+    container_name: gribbot
+    restart: unless-stopped          # автоперезапуск при сбое/перезагрузке сервера
+    env_file:
+      - .env
+    # Логи доступны через: docker compose logs -f gribbot
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
